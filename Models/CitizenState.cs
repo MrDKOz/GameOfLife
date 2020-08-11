@@ -4,7 +4,6 @@
     {
         Living,
         Dead,
-        Born,
         Survived
     }
 }

@@ -1,6 +1,6 @@
 ﻿using GameOfLife.Models;
 
-namespace GameOfLife
+namespace GameOfLife.Simulation
 {
     public static class SimulationHelpers
     {

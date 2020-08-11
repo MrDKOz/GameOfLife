@@ -38,7 +38,7 @@
             this.lblTotalGenerations = new System.Windows.Forms.Label();
             this.nudFrequency = new System.Windows.Forms.NumericUpDown();
             this.nudTotalGenerations = new System.Windows.Forms.NumericUpDown();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.prgTotal = new System.Windows.Forms.ProgressBar();
             this.btnStartSimulation = new System.Windows.Forms.Button();
             this.lblSimulationOutput = new System.Windows.Forms.Label();
             this.pnlGenerationSnapshot = new System.Windows.Forms.Panel();
@@ -93,6 +93,7 @@
             0,
             0,
             0});
+            this.nudRows.Validated += new System.EventHandler(this.nudRows_ValueChanged);
             // 
             // lblColumns
             // 
@@ -120,6 +121,7 @@
             0,
             0,
             0});
+            this.nudColumns.Leave += new System.EventHandler(this.nudRows_ValueChanged);
             // 
             // lblUpdateFrequency
             // 
@@ -170,12 +172,13 @@
             0,
             0});
             // 
-            // progressBar1
+            // prgTotal
             // 
-            this.progressBar1.Location = new System.Drawing.Point(496, 478);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(366, 23);
-            this.progressBar1.TabIndex = 11;
+            this.prgTotal.Location = new System.Drawing.Point(496, 478);
+            this.prgTotal.Name = "prgTotal";
+            this.prgTotal.Size = new System.Drawing.Size(366, 23);
+            this.prgTotal.Step = 1;
+            this.prgTotal.TabIndex = 11;
             // 
             // btnStartSimulation
             // 
@@ -183,7 +186,7 @@
             this.btnStartSimulation.Name = "btnStartSimulation";
             this.btnStartSimulation.Size = new System.Drawing.Size(75, 63);
             this.btnStartSimulation.TabIndex = 12;
-            this.btnStartSimulation.Text = "Start Simulation";
+            this.btnStartSimulation.Text = "Start Simulator";
             this.btnStartSimulation.UseVisualStyleBackColor = true;
             this.btnStartSimulation.Click += new System.EventHandler(this.btnStartSimulation_Click);
             // 
@@ -208,7 +211,7 @@
             // 
             this.btnDefineStartingGeneration.Location = new System.Drawing.Point(702, 507);
             this.btnDefineStartingGeneration.Name = "btnDefineStartingGeneration";
-            this.btnDefineStartingGeneration.Size = new System.Drawing.Size(79, 61);
+            this.btnDefineStartingGeneration.Size = new System.Drawing.Size(79, 63);
             this.btnDefineStartingGeneration.TabIndex = 16;
             this.btnDefineStartingGeneration.Text = "Define Starting Generation";
             this.btnDefineStartingGeneration.UseVisualStyleBackColor = true;
@@ -223,7 +226,7 @@
             this.Controls.Add(this.pnlGenerationSnapshot);
             this.Controls.Add(this.lblSimulationOutput);
             this.Controls.Add(this.btnStartSimulation);
-            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.prgTotal);
             this.Controls.Add(this.nudTotalGenerations);
             this.Controls.Add(this.nudFrequency);
             this.Controls.Add(this.lblTotalGenerations);
@@ -234,7 +237,6 @@
             this.Controls.Add(this.lblRows);
             this.Controls.Add(this.lblGenerationDetails);
             this.Controls.Add(this.lstLog);
-            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -259,7 +261,7 @@
         private System.Windows.Forms.Label lblTotalGenerations;
         private System.Windows.Forms.NumericUpDown nudFrequency;
         private System.Windows.Forms.NumericUpDown nudTotalGenerations;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ProgressBar prgTotal;
         private System.Windows.Forms.Button btnStartSimulation;
         private System.Windows.Forms.Label lblSimulationOutput;
         private System.Windows.Forms.Panel pnlGenerationSnapshot;

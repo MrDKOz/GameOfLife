@@ -1,8 +1,8 @@
-﻿using GameOfLife.Models;
-using System;
+﻿using System;
 using System.Threading;
+using GameOfLife.Models;
 
-namespace GameOfLife.Classes
+namespace GameOfLife.Simulation
 {
     public enum SimulationState
     {
@@ -11,11 +11,11 @@ namespace GameOfLife.Classes
         Cancelled
     }
 
-    public class Simulation
+    public class Simulator
     {
         private readonly SimulationConfig _simulationConfig;
 
-        public Simulation(SimulationConfig simulationConfig)
+        public Simulator(SimulationConfig simulationConfig)
         {
             _simulationConfig = simulationConfig;
         }
@@ -29,7 +29,8 @@ namespace GameOfLife.Classes
             var generationDetails = new GenerationResult
             {
                 Rows = _simulationConfig.Rows,
-                Columns = _simulationConfig.Columns
+                Columns = _simulationConfig.Columns,
+                TargetGenerations = _simulationConfig.TotalGenerations
             };
 
             var currentGeneration = 1;
@@ -39,7 +40,7 @@ namespace GameOfLife.Classes
                 ? _simulationConfig.Initial
                 : GenerateInitial();
 
-            // Simulation new generations until we either have no changes,
+            // Simulator new generations until we either have no changes,
             // or we hit our total generation count
             while (currentGeneration <= _simulationConfig.TotalGenerations)
             {
