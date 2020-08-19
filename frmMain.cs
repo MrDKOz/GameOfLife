@@ -2,6 +2,7 @@
 using System;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GameOfLife.Simulation;
@@ -10,11 +11,31 @@ namespace GameOfLife
 {
     public partial class frmMain : Form
     {
-        private bool initialGridCreated;
+        public enum SimulationState
+        {
+            Waiting,
+            Starting,
+            Simulating,
+            Finished
+        }
+
+        private SimulationState _currentSimulationState;
+
+        public SimulationState CurrentSimulationState
+        {
+            get => _currentSimulationState;
+            set
+            {
+                _currentSimulationState = value;
+                ManageUI();
+            }
+        }
 
         public frmMain()
         {
             InitializeComponent();
+
+            CurrentSimulationState = SimulationState.Waiting;
         }
 
         /// <summary>
@@ -33,17 +54,22 @@ namespace GameOfLife
             };
 
             // Create a new board, or just continue with the pre-defined
+            CurrentSimulationState = SimulationState.Starting;
+
             if (simulationConfig.InitialProvided)
                 simulationConfig.Initial = FetchInitialGeneration(simulationConfig.Rows, simulationConfig.Columns);
             else
                 CreateGrid(simulationConfig.Rows, simulationConfig.Columns);
 
             // Update UI
+            prgTotal.Value = 0;
             prgTotal.Maximum = simulationConfig.TotalGenerations;
 
             // Point our updates, and start the simulation
             var generations = new Progress<GenerationResult>(DisplayResults);
             var simulator = new Simulator(simulationConfig);
+
+            CurrentSimulationState = SimulationState.Simulating;
             await Task.Run(() => simulator.Simulate(generations));
         }
 
@@ -90,15 +116,70 @@ namespace GameOfLife
                         focusButton.Checked = cell == CitizenState.Living;
                 }
 
-            // Write out the current generation details
-            lstLog.Items.Add($"Generation: {generation.Generation}");
-            lstLog.Items.Add($"Births: {generation.Births}");
-            lstLog.Items.Add($"Deaths: {generation.Deaths}");
-            lstLog.Items.Add($"Survivors: {generation.Survivors}");
-            lstLog.Items.Add("----------------------------------");
-
             // Update progress
+            OutputGenerationStatistics(generation);
             prgTotal.PerformStep();
+
+            // Change state when simulation is complete
+            if (generation.Generation == generation.TargetGenerations)
+                CurrentSimulationState = SimulationState.Finished;
+        }
+
+        /// <summary>
+        /// Outputs the generation statistics to the log within the UI.
+        /// </summary>
+        /// <param name="generation">The generation to output the statistics for.</param>
+        private void OutputGenerationStatistics(GenerationResult generation)
+        {
+            var output = new StringBuilder();
+
+            output.Append($"[Generation {generation.Generation}] ✔ {generation.Births} | ❌ {generation.Deaths} | = {generation.Survivors} | ⏲ {generation.TimeTaken}");
+
+            lstLog.Items.Add(output);
+        }
+
+        /// <summary>
+        /// Controls which controls can be interacted with
+        /// depending on the current simulation state.
+        /// </summary>
+        private void ManageUI()
+        {
+            switch (CurrentSimulationState)
+            {
+                case SimulationState.Waiting:
+                    prgTotal.Value = 0;
+                    grpSeedAndSimulationControls.Enabled = true;
+                    btnDefineStartingGeneration.Enabled = true;
+                    btnStart.Text = "Start";
+                    btnStart.Enabled = true;
+                    btnReset.Enabled = false;
+                    lstLog.Items.Clear();
+                    pnlGenerationSnapshot.Controls.Clear();
+                    break;
+                case SimulationState.Starting:
+                    prgTotal.Value = 0;
+
+                    grpSeedAndSimulationControls.Enabled = false;
+                    btnDefineStartingGeneration.Enabled = false;
+                    btnStart.Enabled = false;
+                    btnReset.Enabled = false;
+                    break;
+                case SimulationState.Simulating:
+                    grpSeedAndSimulationControls.Enabled = false;
+                    btnDefineStartingGeneration.Enabled = false;
+                    btnStart.Enabled = false;
+                    btnReset.Enabled = false;
+                    break;
+                case SimulationState.Finished:
+                    grpSeedAndSimulationControls.Enabled = false;
+                    btnDefineStartingGeneration.Enabled = false;
+                    btnStart.Text = "Step";
+                    btnStart.Enabled = true;
+                    btnReset.Enabled = true;
+                    break;
+            }
+
+            Text = $"Conway's Game of Life Simulator [{CurrentSimulationState}]";
         }
 
         /// <summary>
@@ -113,14 +194,12 @@ namespace GameOfLife
                 pnlGenerationSnapshot.Controls.Clear();
 
                 button.Text = "Define Starting Generation";
-                initialGridCreated = false;
             }
             else
             {
                 CreateGrid(Convert.ToInt32(nudRows.Value), Convert.ToInt32(nudColumns.Value));
 
                 button.Text = "Remove Current Grid";
-                initialGridCreated = true;
             }
         }
 
@@ -142,12 +221,25 @@ namespace GameOfLife
             return initialGeneration;
         }
 
+        /// <summary>
+        /// Allows live changing of the rows and columns when setting a seed.
+        /// If the user has chosen to set the initial seed, this will also
+        /// update the current board.
+        /// </summary>
         private void nudRows_ValueChanged(object sender, EventArgs e)
         {
             if (pnlGenerationSnapshot.Controls.Count <= 0) return;
 
             pnlGenerationSnapshot.Controls.Clear();
             CreateGrid(Convert.ToInt32(nudRows.Text), Convert.ToInt32(nudColumns.Text));
+        }
+
+        /// <summary>
+        /// Resets the simulation entirely, allowing a fresh start.
+        /// </summary>
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            CurrentSimulationState = SimulationState.Waiting;
         }
     }
 }

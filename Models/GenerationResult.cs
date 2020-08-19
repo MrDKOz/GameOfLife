@@ -9,6 +9,7 @@
         public int Survivors { get; set; }
         public int Generation { get; set; }
         public int TargetGenerations { get; set; }
+        public long TimeTaken { get; set; }
         public CitizenState[,] Snapshot { get; set; }
     }
 }

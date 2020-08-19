@@ -1,16 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using GameOfLife.Models;
 
 namespace GameOfLife.Simulation
 {
-    public enum SimulationState
-    {
-        Simulating,
-        Complete,
-        Cancelled
-    }
-
     public class Simulator
     {
         private readonly SimulationConfig _simulationConfig;
@@ -83,6 +77,9 @@ namespace GameOfLife.Simulation
             var deaths = 0;
             var births = 0;
             var survivors = 0;
+            var stopWatch = new Stopwatch();
+            
+            stopWatch.Start();
 
             for (var row = 0; row < _simulationConfig.Rows; row++)
                 for (var col = 0; col < _simulationConfig.Columns; col++)
@@ -121,11 +118,14 @@ namespace GameOfLife.Simulation
                     newState[row, col] = newCitizenState;
                 }
 
+            stopWatch.Stop();
+
             // Update the generation in the result
             newGeneration.Snapshot = newState;
             newGeneration.Births = births;
             newGeneration.Deaths = deaths;
             newGeneration.Survivors = survivors;
+            newGeneration.TimeTaken = stopWatch.ElapsedMilliseconds;
 
             return newGeneration;
         }

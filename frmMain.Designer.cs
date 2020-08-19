@@ -39,18 +39,24 @@
             this.nudFrequency = new System.Windows.Forms.NumericUpDown();
             this.nudTotalGenerations = new System.Windows.Forms.NumericUpDown();
             this.prgTotal = new System.Windows.Forms.ProgressBar();
-            this.btnStartSimulation = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
             this.lblSimulationOutput = new System.Windows.Forms.Label();
             this.pnlGenerationSnapshot = new System.Windows.Forms.Panel();
             this.btnDefineStartingGeneration = new System.Windows.Forms.Button();
+            this.grpSeedAndSimulationControls = new System.Windows.Forms.GroupBox();
+            this.btnReset = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudRows)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudColumns)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFrequency)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTotalGenerations)).BeginInit();
+            this.grpSeedAndSimulationControls.SuspendLayout();
             this.SuspendLayout();
             // 
             // lstLog
             // 
+            this.lstLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lstLog.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstLog.FormattingEnabled = true;
             this.lstLog.Location = new System.Drawing.Point(496, 30);
             this.lstLog.Name = "lstLog";
@@ -59,6 +65,7 @@
             // 
             // lblGenerationDetails
             // 
+            this.lblGenerationDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblGenerationDetails.AutoSize = true;
             this.lblGenerationDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGenerationDetails.Location = new System.Drawing.Point(493, 9);
@@ -69,9 +76,10 @@
             // 
             // lblRows
             // 
+            this.lblRows.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblRows.AutoSize = true;
             this.lblRows.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRows.Location = new System.Drawing.Point(12, 513);
+            this.lblRows.Location = new System.Drawing.Point(6, 20);
             this.lblRows.Name = "lblRows";
             this.lblRows.Size = new System.Drawing.Size(35, 13);
             this.lblRows.TabIndex = 3;
@@ -79,9 +87,10 @@
             // 
             // nudRows
             // 
-            this.nudRows.Location = new System.Drawing.Point(69, 511);
+            this.nudRows.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudRows.Location = new System.Drawing.Point(63, 18);
             this.nudRows.Maximum = new decimal(new int[] {
-            31,
+            30,
             0,
             0,
             0});
@@ -89,7 +98,7 @@
             this.nudRows.Size = new System.Drawing.Size(54, 22);
             this.nudRows.TabIndex = 4;
             this.nudRows.Value = new decimal(new int[] {
-            10,
+            30,
             0,
             0,
             0});
@@ -97,9 +106,10 @@
             // 
             // lblColumns
             // 
+            this.lblColumns.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblColumns.AutoSize = true;
             this.lblColumns.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblColumns.Location = new System.Drawing.Point(12, 548);
+            this.lblColumns.Location = new System.Drawing.Point(6, 44);
             this.lblColumns.Name = "lblColumns";
             this.lblColumns.Size = new System.Drawing.Size(53, 13);
             this.lblColumns.TabIndex = 5;
@@ -107,9 +117,10 @@
             // 
             // nudColumns
             // 
-            this.nudColumns.Location = new System.Drawing.Point(69, 546);
+            this.nudColumns.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudColumns.Location = new System.Drawing.Point(63, 42);
             this.nudColumns.Maximum = new decimal(new int[] {
-            31,
+            30,
             0,
             0,
             0});
@@ -117,7 +128,7 @@
             this.nudColumns.Size = new System.Drawing.Size(54, 22);
             this.nudColumns.TabIndex = 6;
             this.nudColumns.Value = new decimal(new int[] {
-            10,
+            30,
             0,
             0,
             0});
@@ -125,9 +136,10 @@
             // 
             // lblUpdateFrequency
             // 
+            this.lblUpdateFrequency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblUpdateFrequency.AutoSize = true;
             this.lblUpdateFrequency.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUpdateFrequency.Location = new System.Drawing.Point(138, 513);
+            this.lblUpdateFrequency.Location = new System.Drawing.Point(132, 20);
             this.lblUpdateFrequency.Name = "lblUpdateFrequency";
             this.lblUpdateFrequency.Size = new System.Drawing.Size(107, 13);
             this.lblUpdateFrequency.TabIndex = 7;
@@ -135,9 +147,10 @@
             // 
             // lblTotalGenerations
             // 
+            this.lblTotalGenerations.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblTotalGenerations.AutoSize = true;
             this.lblTotalGenerations.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalGenerations.Location = new System.Drawing.Point(138, 548);
+            this.lblTotalGenerations.Location = new System.Drawing.Point(132, 44);
             this.lblTotalGenerations.Name = "lblTotalGenerations";
             this.lblTotalGenerations.Size = new System.Drawing.Size(129, 13);
             this.lblTotalGenerations.TabIndex = 8;
@@ -145,7 +158,8 @@
             // 
             // nudFrequency
             // 
-            this.nudFrequency.Location = new System.Drawing.Point(275, 511);
+            this.nudFrequency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudFrequency.Location = new System.Drawing.Point(269, 18);
             this.nudFrequency.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -162,7 +176,8 @@
             // 
             // nudTotalGenerations
             // 
-            this.nudTotalGenerations.Location = new System.Drawing.Point(275, 546);
+            this.nudTotalGenerations.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudTotalGenerations.Location = new System.Drawing.Point(269, 42);
             this.nudTotalGenerations.Name = "nudTotalGenerations";
             this.nudTotalGenerations.Size = new System.Drawing.Size(54, 22);
             this.nudTotalGenerations.TabIndex = 10;
@@ -174,21 +189,23 @@
             // 
             // prgTotal
             // 
-            this.prgTotal.Location = new System.Drawing.Point(496, 478);
+            this.prgTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.prgTotal.Location = new System.Drawing.Point(496, 479);
             this.prgTotal.Name = "prgTotal";
             this.prgTotal.Size = new System.Drawing.Size(366, 23);
             this.prgTotal.Step = 1;
             this.prgTotal.TabIndex = 11;
             // 
-            // btnStartSimulation
+            // btnStart
             // 
-            this.btnStartSimulation.Location = new System.Drawing.Point(787, 507);
-            this.btnStartSimulation.Name = "btnStartSimulation";
-            this.btnStartSimulation.Size = new System.Drawing.Size(75, 63);
-            this.btnStartSimulation.TabIndex = 12;
-            this.btnStartSimulation.Text = "Start Simulator";
-            this.btnStartSimulation.UseVisualStyleBackColor = true;
-            this.btnStartSimulation.Click += new System.EventHandler(this.btnStartSimulation_Click);
+            this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStart.Location = new System.Drawing.Point(787, 508);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(75, 31);
+            this.btnStart.TabIndex = 12;
+            this.btnStart.Text = "Start";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStartSimulation_Click);
             // 
             // lblSimulationOutput
             // 
@@ -202,14 +219,19 @@
             // 
             // pnlGenerationSnapshot
             // 
+            this.pnlGenerationSnapshot.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlGenerationSnapshot.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pnlGenerationSnapshot.Location = new System.Drawing.Point(15, 30);
             this.pnlGenerationSnapshot.Name = "pnlGenerationSnapshot";
-            this.pnlGenerationSnapshot.Size = new System.Drawing.Size(469, 471);
+            this.pnlGenerationSnapshot.Size = new System.Drawing.Size(469, 472);
             this.pnlGenerationSnapshot.TabIndex = 15;
             // 
             // btnDefineStartingGeneration
             // 
-            this.btnDefineStartingGeneration.Location = new System.Drawing.Point(702, 507);
+            this.btnDefineStartingGeneration.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDefineStartingGeneration.Location = new System.Drawing.Point(352, 508);
             this.btnDefineStartingGeneration.Name = "btnDefineStartingGeneration";
             this.btnDefineStartingGeneration.Size = new System.Drawing.Size(79, 63);
             this.btnDefineStartingGeneration.TabIndex = 16;
@@ -217,27 +239,50 @@
             this.btnDefineStartingGeneration.UseVisualStyleBackColor = true;
             this.btnDefineStartingGeneration.Click += new System.EventHandler(this.btnDefineStartingGeneration_Click);
             // 
+            // grpSeedAndSimulationControls
+            // 
+            this.grpSeedAndSimulationControls.Controls.Add(this.lblRows);
+            this.grpSeedAndSimulationControls.Controls.Add(this.nudRows);
+            this.grpSeedAndSimulationControls.Controls.Add(this.lblUpdateFrequency);
+            this.grpSeedAndSimulationControls.Controls.Add(this.nudFrequency);
+            this.grpSeedAndSimulationControls.Controls.Add(this.nudColumns);
+            this.grpSeedAndSimulationControls.Controls.Add(this.lblColumns);
+            this.grpSeedAndSimulationControls.Controls.Add(this.nudTotalGenerations);
+            this.grpSeedAndSimulationControls.Controls.Add(this.lblTotalGenerations);
+            this.grpSeedAndSimulationControls.Location = new System.Drawing.Point(15, 502);
+            this.grpSeedAndSimulationControls.Name = "grpSeedAndSimulationControls";
+            this.grpSeedAndSimulationControls.Size = new System.Drawing.Size(331, 69);
+            this.grpSeedAndSimulationControls.TabIndex = 17;
+            this.grpSeedAndSimulationControls.TabStop = false;
+            this.grpSeedAndSimulationControls.Text = "Seed/Simulation Controls";
+            // 
+            // btnReset
+            // 
+            this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReset.Location = new System.Drawing.Point(787, 540);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(75, 31);
+            this.btnReset.TabIndex = 18;
+            this.btnReset.Text = "Reset";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(874, 580);
+            this.ClientSize = new System.Drawing.Size(874, 581);
+            this.Controls.Add(this.btnReset);
+            this.Controls.Add(this.grpSeedAndSimulationControls);
             this.Controls.Add(this.btnDefineStartingGeneration);
             this.Controls.Add(this.pnlGenerationSnapshot);
             this.Controls.Add(this.lblSimulationOutput);
-            this.Controls.Add(this.btnStartSimulation);
+            this.Controls.Add(this.btnStart);
             this.Controls.Add(this.prgTotal);
-            this.Controls.Add(this.nudTotalGenerations);
-            this.Controls.Add(this.nudFrequency);
-            this.Controls.Add(this.lblTotalGenerations);
-            this.Controls.Add(this.lblUpdateFrequency);
-            this.Controls.Add(this.nudColumns);
-            this.Controls.Add(this.lblColumns);
-            this.Controls.Add(this.nudRows);
-            this.Controls.Add(this.lblRows);
             this.Controls.Add(this.lblGenerationDetails);
             this.Controls.Add(this.lstLog);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MinimumSize = new System.Drawing.Size(890, 620);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Conway\'s Game of Life Simulator";
@@ -245,6 +290,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudColumns)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFrequency)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTotalGenerations)).EndInit();
+            this.grpSeedAndSimulationControls.ResumeLayout(false);
+            this.grpSeedAndSimulationControls.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -262,10 +309,12 @@
         private System.Windows.Forms.NumericUpDown nudFrequency;
         private System.Windows.Forms.NumericUpDown nudTotalGenerations;
         private System.Windows.Forms.ProgressBar prgTotal;
-        private System.Windows.Forms.Button btnStartSimulation;
+        private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Label lblSimulationOutput;
         private System.Windows.Forms.Panel pnlGenerationSnapshot;
         private System.Windows.Forms.Button btnDefineStartingGeneration;
+        private System.Windows.Forms.GroupBox grpSeedAndSimulationControls;
+        private System.Windows.Forms.Button btnReset;
     }
 }
 
